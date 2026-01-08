@@ -42,6 +42,14 @@ const EarningsScreen = () => {
 
   const current = earningsData[period];
 
+  const calculateAveragePerJob = () => {
+    if (current.jobs === 0) {
+      return '0';
+    }
+    const totalAmount = parseInt(current.total.replace(/[^\d]/g, ''));
+    return (totalAmount / current.jobs).toFixed(0);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -129,7 +137,7 @@ const EarningsScreen = () => {
         <View style={styles.statsGrid}>
           <View style={styles.statCard}>
             <Text style={styles.statValue}>
-              {(parseInt(current.total.replace(/[^\d]/g, '')) / current.jobs).toFixed(0)}
+              ₵{calculateAveragePerJob()}
             </Text>
             <Text style={styles.statLabel}>Avg per Job</Text>
           </View>
